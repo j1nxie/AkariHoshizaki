@@ -34,6 +34,11 @@ dependencies {
 	implementation(libs.kord.extensions)
 	implementation(libs.kotlin.stdlib)
 	implementation(libs.kx.ser)
+	implementation(libs.ktor.client.core)
+	implementation(libs.ktor.client.cio)
+	implementation(libs.ktor.client.auth)
+	implementation(libs.ktor.client.content.negotiation)
+	implementation(libs.ktor.serialization.kotlinx.json)
 
 	// Logging dependencies
 	implementation(libs.groovy)

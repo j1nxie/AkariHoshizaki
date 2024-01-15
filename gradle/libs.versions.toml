@@ -12,12 +12,19 @@ logback-groovy = "1.14.4"
 
 semver = "1.1.2"
 
+ktor-client = "2.3.7"
+
 [libraries]
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 groovy = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
 jansi = { module = "org.fusesource.jansi:jansi", version.ref = "jansi" }
 kord-extensions = { module = "com.kotlindiscord.kord.extensions:kord-extensions", version.ref = "kord-extensions" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client"}
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor-client"}
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor-client"}
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-client"}
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-client"}
 kx-ser = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kx-ser" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logback-groovy = { module = "io.github.virtualdogbert:logback-groovy-config", version.ref = "logback-groovy" }
