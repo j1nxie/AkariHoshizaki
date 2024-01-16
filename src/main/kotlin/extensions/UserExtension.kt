@@ -11,7 +11,6 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import moe.rylie.akarihoshizaki.client
 import moe.rylie.akarihoshizaki.constants.BASE_URL
-import moe.rylie.akarihoshizaki.constants.CDN_URL
 import moe.rylie.akarihoshizaki.models.KamaitachiResponse
 import moe.rylie.akarihoshizaki.models.UserDocument
 
@@ -36,17 +35,14 @@ class UserExtension : Extension() {
 						}
 					}
 				} else {
-					val imageString = if (response.body?.customPfpLocation == null) {
-						"$CDN_URL/users/default/pfp"
-					} else {
-						"$CDN_URL/users/${response.body.id}/pfp-${response.body.customPfpLocation}"
-					}
 					respond {
 						embed {
 							title = "${response.body?.username} [ID: ${response.body?.id}]"
 							url = "https://kamaitachi.xyz/u/${response.body?.username}"
-							// TODO: fix the image string - waiting for zk to fix the api ig?
-							image = imageString
+							thumbnail {
+								url = "$BASE_URL/users/${response.body?.id}/pfp.png"
+							}
+							image = "$BASE_URL/users/${response.body?.id}/banner.png"
 							description = response.body?.about
 							footer {
 								text = response.body?.status.toString()
