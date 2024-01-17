@@ -11,6 +11,7 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import moe.rylie.akarihoshizaki.client
 import moe.rylie.akarihoshizaki.constants.BASE_URL
+import moe.rylie.akarihoshizaki.constants.PROXY_URL
 import moe.rylie.akarihoshizaki.models.KamaitachiResponse
 import moe.rylie.akarihoshizaki.models.UserDocument
 
@@ -40,12 +41,13 @@ class UserExtension : Extension() {
 							title = "${response.body?.username} [ID: ${response.body?.id}]"
 							url = "https://kamaitachi.xyz/u/${response.body?.username}"
 							thumbnail {
-								url = "$BASE_URL/users/${response.body?.id}/pfp.png"
+								url = "$PROXY_URL/pfp/${response.body?.id}.png"
 							}
-							image = "$BASE_URL/users/${response.body?.id}/banner.png"
-							description = response.body?.about
+							image = "$PROXY_URL/banner/${response.body?.id}.png"
+							description = if (response.body?.about == null) "No description." else response.body.about
 							footer {
-								text = response.body?.status.toString()
+								text =
+									if (response.body?.status == null) "No status." else response.body.status.toString()
 							}
 						}
 					}
