@@ -14,6 +14,9 @@ import moe.rylie.akarihoshizaki.constants.BASE_URL
 import moe.rylie.akarihoshizaki.constants.PROXY_URL
 import moe.rylie.akarihoshizaki.models.KamaitachiResponse
 import moe.rylie.akarihoshizaki.models.UserDocument
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 
 class UserExtension : Extension() {
@@ -36,6 +39,7 @@ class UserExtension : Extension() {
 						}
 					}
 				} else {
+					val dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 					respond {
 						embed {
 							title = "${response.body?.username} [ID: ${response.body?.id}]"
@@ -44,10 +48,25 @@ class UserExtension : Extension() {
 								url = "$PROXY_URL/pfp/${response.body?.id}.png"
 							}
 							image = "$PROXY_URL/banner/${response.body?.id}.png"
-							description = if (response.body?.about == null) "No description." else response.body.about
+							description =
+								if (response.body?.about == null) "No description." else response.body.about
 							footer {
 								text =
 									if (response.body?.status == null) "No status." else response.body.status.toString()
+							}
+							field {
+								name = "Joined on"
+								value = (response.body?.joinDate?.let { it1 ->
+									Instant.ofEpochMilli(it1).atZone(ZoneId.systemDefault())
+										.toLocalDateTime().format(dateFormat)
+								}.toString())
+							}
+							field {
+								name = "Last seen"
+								value = (response.body?.lastSeen?.let { it1 ->
+									Instant.ofEpochMilli(it1).atZone(ZoneId.systemDefault())
+										.toLocalDateTime().format(dateFormat)
+								}.toString())
 							}
 						}
 					}
