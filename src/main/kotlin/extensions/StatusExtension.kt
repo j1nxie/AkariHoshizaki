@@ -11,9 +11,11 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import moe.rylie.akarihoshizaki.client
 import moe.rylie.akarihoshizaki.constants.BASE_URL
+import moe.rylie.akarihoshizaki.constants.CDN_URL
 import moe.rylie.akarihoshizaki.models.KamaitachiResponse
 import moe.rylie.akarihoshizaki.models.StatusDocument
 import java.time.Instant
+import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
@@ -26,8 +28,9 @@ class StatusExtension : Extension() {
 			description = "get Kamaitachi's status."
 
 			action {
-				var url = if (arguments.echo != null) "$BASE_URL/status?echo=${arguments.echo}" else "$BASE_URL/status"
-				val response: KamaitachiResponse<StatusDocument> = client.get(url).body()
+				val apiUrl =
+					if (arguments.echo != null) "$BASE_URL/status?echo=${arguments.echo}" else "$BASE_URL/status"
+				val response: KamaitachiResponse<StatusDocument> = client.get(apiUrl).body()
 
 				if (!response.success) {
 					respond {
@@ -43,6 +46,9 @@ class StatusExtension : Extension() {
 						embed {
 							title = "Kamaitachi is live!"
 							url = "https://kamaitachi.xyz"
+							thumbnail {
+								url = "$CDN_URL/logos/logo-mark.png"
+							}
 							field {
 								name = "Server time"
 								value = (response.body?.serverTime?.let { it1 ->
@@ -66,6 +72,9 @@ class StatusExtension : Extension() {
 									name = "Echo"
 									value = response.body?.echo.toString()
 								}
+							}
+							footer {
+								text = "Fetched at ${LocalDateTime.now().format(dateFormat)}"
 							}
 						}
 					}
