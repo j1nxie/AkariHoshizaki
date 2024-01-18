@@ -10,7 +10,7 @@ plugins {
 	id("io.gitlab.arturbosch.detekt")
 }
 
-group = "moe.rylie"
+group = "moe.rylie.akarihoshizaki"
 version = "1.0.0-SNAPSHOT"
 
 repositories {

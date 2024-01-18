@@ -12,4 +12,4 @@ pluginManagement {
 	}
 }
 
-rootProject.name = "moe.rylie"
+rootProject.name = "moe.rylie.akarihoshizaki"
