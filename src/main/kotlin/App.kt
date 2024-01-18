@@ -10,7 +10,9 @@ import io.ktor.client.plugins.auth.providers.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
-import moe.rylie.akarihoshizaki.extensions.*
+import moe.rylie.akarihoshizaki.extensions.PingExtension
+import moe.rylie.akarihoshizaki.extensions.StatusExtension
+import moe.rylie.akarihoshizaki.extensions.UserExtension
 
 val TEST_SERVER_ID = Snowflake(
 	env("TEST_SERVER").toLong()  // Get the test server ID from the env vars or a .env file
@@ -59,6 +61,7 @@ suspend fun main() {
 		extensions {
 			add(::PingExtension)
 			add(::UserExtension)
+			add(::StatusExtension)
 		}
 	}
 
