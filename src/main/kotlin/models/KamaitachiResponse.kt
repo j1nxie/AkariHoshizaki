@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class KamaitachiResponse<T>(
 	val success: Boolean,
 	val description: String,
-	val body: T?,
+	val body: T? = null,
 )
